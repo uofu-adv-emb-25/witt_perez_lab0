@@ -8,3 +8,4 @@ log
 *-profile
 pico-examples/
 .vscode/
+lib/pico-examples/

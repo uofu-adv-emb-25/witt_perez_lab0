@@ -20,6 +20,3 @@
 [submodule "lib/unity"]
 	path = lib/unity
 	url = https://github.com/ThrowTheSwitch/Unity.git
-[submodule "lib/pico-examples"]
-	path = lib/pico-examples
-	url = https://github.com/raspberrypi/pico-examples.git
