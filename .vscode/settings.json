@@ -1,40 +1,28 @@
 {
-    "cmake.options.statusBarVisibility": "hidden",
-    "cmake.options.advanced": {
-        "build": {
-            "statusBarVisibility": "hidden"
-        },
-        "launch": {
-            "statusBarVisibility": "hidden"
-        },
-        "debug": {
-            "statusBarVisibility": "hidden"
-        }
-    },
-    "cmake.configureOnEdit": false,
-    "cmake.automaticReconfigure": false,
-    "cmake.configureOnOpen": false,
-    "cmake.generator": "Ninja",
-    "cmake.cmakePath": "${userHome}/.pico-sdk/cmake/v3.28.6/bin/cmake",
-    "C_Cpp.debugShortcut": false,
-    "terminal.integrated.env.windows": {
-        "PICO_SDK_PATH": "${env:USERPROFILE}/.pico-sdk/sdk/2.0.0",
-        "PICO_TOOLCHAIN_PATH": "${env:USERPROFILE}/.pico-sdk/toolchain/13_2_Rel1",
-        "Path": "${env:USERPROFILE}/.pico-sdk/toolchain/13_2_Rel1/bin;${env:USERPROFILE}/.pico-sdk/picotool/2.0.0/picotool;${env:USERPROFILE}/.pico-sdk/cmake/v3.28.6/bin;${env:USERPROFILE}/.pico-sdk/ninja/v1.12.1;${env:PATH}"
-    },
-    "terminal.integrated.env.osx": {
-        "PICO_SDK_PATH": "${env:HOME}/.pico-sdk/sdk/2.0.0",
-        "PICO_TOOLCHAIN_PATH": "${env:HOME}/.pico-sdk/toolchain/13_2_Rel1",
-        "PATH": "${env:HOME}/.pico-sdk/toolchain/13_2_Rel1/bin:${env:HOME}/.pico-sdk/picotool/2.0.0/picotool:${env:HOME}/.pico-sdk/cmake/v3.28.6/bin:${env:HOME}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
-    },
-    "terminal.integrated.env.linux": {
-        "PICO_SDK_PATH": "${env:HOME}/.pico-sdk/sdk/2.0.0",
-        "PICO_TOOLCHAIN_PATH": "${env:HOME}/.pico-sdk/toolchain/13_2_Rel1",
-        "PATH": "${env:HOME}/.pico-sdk/toolchain/13_2_Rel1/bin:${env:HOME}/.pico-sdk/picotool/2.0.0/picotool:${env:HOME}/.pico-sdk/cmake/v3.28.6/bin:${env:HOME}/.pico-sdk/ninja/v1.12.1:${env:PATH}"
-    },
-    "raspberry-pi-pico.cmakeAutoConfigure": true,
-    "raspberry-pi-pico.useCmakeTools": false,
-    "raspberry-pi-pico.cmakePath": "${HOME}/.pico-sdk/cmake/v3.28.6/bin/cmake",
-    "raspberry-pi-pico.ninjaPath": "${HOME}/.pico-sdk/ninja/v1.12.1/ninja",
-    "raspberry-pi-pico.python3Path": "python3"
+  "cmake.cmakePath": "/opt/homebrew/bin/cmake",
+  "cmake.generator": "Ninja",
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+
+  // Tell CMake exactly where SDK/FreeRTOS and the cross-compilers are
+  "cmake.configureArgs": [
+    "-DPICO_SDK_PATH=${workspaceFolder}/lib/pico-sdk",
+    "-DFREERTOS_PATH=${workspaceFolder}/lib/freertos",
+    "-DCMAKE_C_COMPILER=${env:ARM_BIN}/arm-none-eabi-gcc",
+    "-DCMAKE_CXX_COMPILER=${env:ARM_BIN}/arm-none-eabi-g++",
+    "-DCMAKE_ASM_COMPILER=${env:ARM_BIN}/arm-none-eabi-gcc",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+  ],
+  "cmake.configureEnvironment": {
+    "ARM_BIN": "/Applications/Arm GNUToolchain 14.3.Rel1 (arm-none-eabi)/bin"
+  },
+
+  // Let the C/C++ extension read CMake’s config automatically
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+
+  // Terminals inside VS Code should also see the toolchain first on PATH
+  "terminal.integrated.env.osx": {
+    "PICO_SDK_PATH": "${workspaceFolder}/lib/pico-sdk",
+    "ARM_BIN": "/Applications/Arm GNUToolchain 14.3.Rel1 (arm-none-eabi)/bin",
+    "PATH": "${env:ARM_BIN}:/opt/homebrew/bin:/opt/homebrew/sbin:${env:PATH}"
+  }
 }
